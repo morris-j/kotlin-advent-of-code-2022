@@ -1,17 +1,21 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+
+    fun processInput(input: String): List<Int> {
+        return input.split("\n\n").map { it.split("\n").sumOf { it.toInt() } }
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun part1(input: String): Int {
+        val items = processInput(input).sortedDescending()
+        return items.first()
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    fun part2(input: String): Int {
+        // Find the Elf carrying the most Calories, How many total Calories is that Elf carrying?
+        val items = processInput(input).sortedDescending()
+        return items.take(3).sum()
+    }
 
-    val input = readInput("Day01")
+    val input = readInputAsString("Day01")
     println(part1(input))
     println(part2(input))
 }
